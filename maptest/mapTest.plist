@@ -1,1 +1,7 @@
-{ Filter = { Bundles = ( "com.apple.mobileme.fmf1" ); }; }
+{ Filter = 
+    { Bundles = ( 
+        "com.apple.mobileme.fmf1",
+        "com.apple.aosnotifyd" 
+        ); 
+    }; 
+}
