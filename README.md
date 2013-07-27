@@ -3,9 +3,9 @@ FMFChinaLocationPatch
 
 Fix Find My Friends location shift in China
 
-### Installation
+## Installation
 
-## Install from source
+### Install from source
 
 Install theos and setup environment
 
@@ -20,9 +20,9 @@ Compile and install package
     make package
     make install
 
-## Install from Cydia
+### Install from Cydia
 
-Package submiting...
+Package submitting...
 
 ## How it works
 
