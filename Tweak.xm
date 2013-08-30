@@ -63,12 +63,34 @@ double transformLon(double x, double y)
 - (void)updateLatitude:(id)lat longitude:(id)lng altitude:(id)alt horizontalAccuracy:(id)acc verticalAccuracy:(id)acc5 course:(id)c speed:(id)s timestamp:(id)ts {
     double nlat,nlng;
     transform([lat doubleValue],[lng doubleValue], &nlat, &nlng);
-    //float nlat=[lat floatValue]-0.002072;
-    //float nlng=[lng floatValue]+0.004294;
     NSNumber *olat=[NSNumber numberWithDouble:nlat];
     NSNumber *olng=[NSNumber numberWithDouble:nlng];
-
     %orig(olat,olng,alt,acc,acc5,c,s,ts); 
+}
+%end
+
+%hook MyLocationController 
+-(void)updateCurrentLocationTo:(id)to{
+    CLLocation *lp=(CLLocation *)to;
+    double nlat,nlng;
+    NSDictionary *prefs=[[NSDictionary alloc] initWithContentsOfFile:
+        @"/var/mobile/Library/Preferences/com.weishi.fmflocationfix-prefs.plist"
+        ];
+    if ([[prefs objectForKey:@"enableLocationSpoofing"] boolValue]){
+        double spoofedLat, spoofedLong;
+        spoofedLat=[[prefs objectForKey:@"latitude"] doubleValue];
+        spoofedLong=[[prefs objectForKey:@"longitude"] doubleValue];
+        transform(spoofedLat, spoofedLong, &nlat, &nlng);
+    }else{
+        transform(lp.coordinate.latitude, lp.coordinate.longitude, &nlat, &nlng);
+    }
+    CLLocation *c = [[[CLLocation alloc] 
+        initWithCoordinate:CLLocationCoordinate2DMake(nlat, nlng)
+        altitude:lp.altitude
+        horizontalAccuracy:lp.horizontalAccuracy
+        verticalAccuracy:lp.verticalAccuracy
+        timestamp:lp.timestamp] autorelease];
+    %orig(c);
 }
 %end
 
@@ -76,9 +98,17 @@ double transformLon(double x, double y)
 -(void)sendCurrentLocation:(id)fp8 isFinished:(BOOL)fp12 forCmd:(id)fp16 withReason:(int)fp20 andAccuracyChange:(double)fp24{
     CLLocation *lp=(CLLocation *)fp8;
     double nlat,nlng;
-    transform(lp.coordinate.latitude, lp.coordinate.longitude, &nlat, &nlng);
-    //float nlat=lp.coordinate.latitude - 0.002072;
-    //float nlng=lp.coordinate.longitude + 0.004294;
+    NSDictionary *prefs=[[NSDictionary alloc] initWithContentsOfFile:
+        @"/var/mobile/Library/Preferences/com.weishi.fmflocationfix-prefs.plist"
+        ];
+    if ([[prefs objectForKey:@"enableLocationSpoofing"] boolValue]){
+        double spoofedLat, spoofedLong;
+        spoofedLat=[[prefs objectForKey:@"latitude"] doubleValue];
+        spoofedLong=[[prefs objectForKey:@"longitude"] doubleValue];
+        transform(spoofedLat, spoofedLong, &nlat, &nlng);
+    }else{
+        transform(lp.coordinate.latitude, lp.coordinate.longitude, &nlat, &nlng);
+    }
     CLLocation *c = [[[CLLocation alloc] 
         initWithCoordinate:CLLocationCoordinate2DMake(nlat, nlng)
         altitude:lp.altitude

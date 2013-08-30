@@ -8,3 +8,5 @@ FindMyFriendsChinaLocationPatch_FILES = Tweak.xm
 FindMyFriendsChinaLocationPatch_FRAMEWORKS = CoreLocation
 
 include $(THEOS_MAKE_PATH)/tweak.mk
+SUBPROJECTS += fmfprefs
+include $(THEOS_MAKE_PATH)/aggregate.mk
