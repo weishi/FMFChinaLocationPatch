@@ -11,6 +11,18 @@
 	}
 	return _specifiers;
 }
-@end
 
+- (NSString *) getVersion: (PSSpecifier *) spec {
+    return @"1.1.2";
+}
+- (NSString *) getAuthor: (PSSpecifier *) spec {
+    return @"Wei Shi";
+}
+- (NSString *) getTwitter: (PSSpecifier *) spec {
+    return @"@weishics";
+}
+- (NSString *) getBlog: (PSSpecifier *) spec {
+    return @"weishi.github.io";
+}
+@end
 // vim:ft=objc

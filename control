@@ -1,7 +1,7 @@
 Package: com.weishi.fmflocationfix
 Name: Find My Friends China Location Patch
 Depends: mobilesubstrate
-Version: 0.0.1
+Version: 1.1.2
 Architecture: iphoneos-arm
 Description: Let your unjailbroken friends see your correct location. Fixes location shift in China.
 Maintainer: Wei Shi

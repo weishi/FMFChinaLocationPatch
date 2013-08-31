@@ -16,6 +16,15 @@
 			<key>label</key>
 			<string>Enable location spoofing</string>
 		</dict>
+
+        <dict>
+            <key>cell</key>
+            <string>PSGroupCell</string>
+            <key>label</key>
+            <string>Coordinates</string>
+            <key>footerText</key>
+            <string>Location shift fix for mainland China is automatically applied. Use regular GPS coordinates for spoofing.</string>
+        </dict>
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
@@ -25,6 +34,8 @@
 			<string>latitude</string>
 			<key>label</key>
 			<string>Latitude</string>
+			<key>keyboard</key>
+            <string>numbers</string>
         </dict>
 		<dict>
 			<key>cell</key>
@@ -35,6 +46,49 @@
 			<string>longitude</string>
 			<key>label</key>
 			<string>Longitude</string>
+			<key>keyboard</key>
+            <string>numbers</string>
+        </dict>
+        
+        <dict>
+            <key>cell</key>
+            <string>PSGroupCell</string>
+            <key>label</key>
+            <string>About</string>
+            <key>footerText</key>
+            <string>Source code is available at github.com/weishi/FMFChinaLocationPatch</string>
+        </dict>
+        <dict>
+            <key>cell</key>
+            <string>PSTitleValueCell</string>
+            <key>label</key>
+            <string>Version</string>
+            <key>get</key>
+            <string>getVersion:</string>
+        </dict>
+        <dict>
+            <key>cell</key>
+            <string>PSTitleValueCell</string>
+            <key>label</key>
+            <string>Author</string>
+            <key>get</key>
+            <string>getAuthor:</string>
+        </dict>
+        <dict>
+            <key>cell</key>
+            <string>PSTitleValueCell</string>
+            <key>label</key>
+            <string>Twitter</string>
+            <key>get</key>
+            <string>getTwitter:</string>
+        </dict>
+        <dict>
+            <key>cell</key>
+            <string>PSTitleValueCell</string>
+            <key>label</key>
+            <string>Blog</string>
+            <key>get</key>
+            <string>getBlog:</string>
         </dict>
 	</array>
 	<key>title</key>
