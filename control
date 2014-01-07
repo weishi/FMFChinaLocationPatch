@@ -1,9 +1,9 @@
-Package: com.weishi.fmflocationfix
-Name: Find My Friends China Location Patch
+Package: com.weishi.fmfipspoofer
+Name: FMFIP Spoofer
 Depends: mobilesubstrate
-Version: 1.1.2
+Version: 1.2.0
 Architecture: iphoneos-arm
-Description: Let your unjailbroken friends see your correct location. Fixes location shift in China.
-Maintainer: Wei Shi
-Author: Wei Shi
+Description: Spoof Find My Friends/iPhone location. Fix location shift in Mainland China.
+Maintainer: Wei Shi <willsplashing@gmail.com>
+Author: Wei Shi <willsplashing@gmail.com>
 Section: Tweaks

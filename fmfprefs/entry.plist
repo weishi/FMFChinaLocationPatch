@@ -1,10 +1,10 @@
 {
-    entry = {
-	bundle = fmfprefs;
-	cell = PSLinkCell;
-	detail = fmfprefsListController;
-	icon = fmfprefs.png;
-	isController = 1;
-	label = FMFLocationSpoofer;
-    };
+	entry = {
+		bundle = fmfprefs;
+		cell = PSLinkCell;
+		detail = "fmfprefsListController";
+		icon = "icon.png";
+		isController = 1;
+		label = "FMFIP Spoofer";
+	};
 }

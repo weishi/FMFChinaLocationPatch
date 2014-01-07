@@ -6,92 +6,112 @@
 	<array>
 		<dict>
 			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Location spoofing</string>
+			<key>footerText</key>
+			<string>Use regular GPS coordinates for spoofing.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.weishi.fmflocationfix-prefs</string>
+			<string>com.weishi.fmfipspoofer-prefs</string>
 			<key>key</key>
 			<string>enableLocationSpoofing</string>
 			<key>label</key>
 			<string>Enable location spoofing</string>
 		</dict>
-
-        <dict>
-            <key>cell</key>
-            <string>PSGroupCell</string>
-            <key>label</key>
-            <string>Coordinates</string>
-            <key>footerText</key>
-            <string>Location shift fix for mainland China is automatically applied. Use regular GPS coordinates for spoofing.</string>
-        </dict>
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
 			<key>defaults</key>
-			<string>com.weishi.fmflocationfix-prefs</string>
+			<string>com.weishi.fmfipspoofer-prefs</string>
 			<key>key</key>
 			<string>latitude</string>
 			<key>label</key>
 			<string>Latitude</string>
 			<key>keyboard</key>
-            <string>numbers</string>
-        </dict>
+			<string>numbers</string>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
 			<key>defaults</key>
-			<string>com.weishi.fmflocationfix-prefs</string>
+			<string>com.weishi.fmfipspoofer-prefs</string>
 			<key>key</key>
 			<string>longitude</string>
 			<key>label</key>
 			<string>Longitude</string>
 			<key>keyboard</key>
-            <string>numbers</string>
-        </dict>
-        
-        <dict>
-            <key>cell</key>
-            <string>PSGroupCell</string>
-            <key>label</key>
-            <string>About</string>
-            <key>footerText</key>
-            <string>Source code is available at github.com/weishi/FMFChinaLocationPatch</string>
-        </dict>
-        <dict>
-            <key>cell</key>
-            <string>PSTitleValueCell</string>
-            <key>label</key>
-            <string>Version</string>
-            <key>get</key>
-            <string>getVersion:</string>
-        </dict>
-        <dict>
-            <key>cell</key>
-            <string>PSTitleValueCell</string>
-            <key>label</key>
-            <string>Author</string>
-            <key>get</key>
-            <string>getAuthor:</string>
-        </dict>
-        <dict>
-            <key>cell</key>
-            <string>PSTitleValueCell</string>
-            <key>label</key>
-            <string>Twitter</string>
-            <key>get</key>
-            <string>getTwitter:</string>
-        </dict>
-        <dict>
-            <key>cell</key>
-            <string>PSTitleValueCell</string>
-            <key>label</key>
-            <string>Blog</string>
-            <key>get</key>
-            <string>getBlog:</string>
-        </dict>
+			<string>numbers</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Location reporting</string>
+			<key>footerText</key>
+            <string>Turn on ONLY if all your friends are applying location shifting on their end, i.e. they have this tweak installed. 
+Leave this OFF when using Find My iPhone in icloud.com.
+            </string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.weishi.fmfipspoofer-prefs</string>
+			<key>key</key>
+			<string>reportShiftedLocation</string>
+			<key>label</key>
+			<string>Don't fix my reported location</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>About</string>
+			<key>footerText</key>
+			<string>Source code is available at github.com/weishi/FMFChinaLocationPatch</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSTitleValueCell</string>
+			<key>label</key>
+			<string>Version</string>
+			<key>get</key>
+			<string>getVersion:</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSTitleValueCell</string>
+			<key>label</key>
+			<string>Author</string>
+			<key>get</key>
+			<string>getAuthor:</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSTitleValueCell</string>
+			<key>label</key>
+			<string>Twitter</string>
+			<key>get</key>
+			<string>getTwitter:</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSTitleValueCell</string>
+			<key>label</key>
+			<string>Blog</string>
+			<key>get</key>
+			<string>getBlog:</string>
+		</dict>
 	</array>
 	<key>title</key>
-	<string>FMFLocationSpoofer</string>
+	<string>FMFIP Spoofer</string>
 </dict>
 </plist>

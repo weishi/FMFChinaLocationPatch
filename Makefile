@@ -1,11 +1,11 @@
-export ARCHS=armv7
-export TARGET=iphone:latest:4.3
+export ARCHS=armv7 arm64
+export TARGET=iphone:7.0:2.0
 
 include theos/makefiles/common.mk
 
-TWEAK_NAME = FindMyFriendsChinaLocationPatch
-FindMyFriendsChinaLocationPatch_FILES = Tweak.xm
-FindMyFriendsChinaLocationPatch_FRAMEWORKS = CoreLocation
+TWEAK_NAME = FMFIPSpoofer
+FMFIPSpoofer_FILES = Tweak.xm
+FMFIPSpoofer_FRAMEWORKS = CoreLocation
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += fmfprefs

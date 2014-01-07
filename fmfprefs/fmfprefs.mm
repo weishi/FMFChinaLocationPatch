@@ -13,7 +13,7 @@
 }
 
 - (NSString *) getVersion: (PSSpecifier *) spec {
-    return @"1.1.2";
+    return @"1.2.0";
 }
 - (NSString *) getAuthor: (PSSpecifier *) spec {
     return @"Wei Shi";

@@ -59,6 +59,8 @@ double transformLon(double x, double y)
     return ret;
 }
 
+/* ------- Begin hooking functions ------- */
+
 %hook FMFLocation
 - (void)updateLatitude:(id)lat longitude:(id)lng altitude:(id)alt horizontalAccuracy:(id)acc verticalAccuracy:(id)acc5 course:(id)c speed:(id)s timestamp:(id)ts {
     double nlat,nlng;
@@ -74,15 +76,34 @@ double transformLon(double x, double y)
     CLLocation *lp=(CLLocation *)to;
     double nlat,nlng;
     NSDictionary *prefs=[[NSDictionary alloc] initWithContentsOfFile:
-        @"/var/mobile/Library/Preferences/com.weishi.fmflocationfix-prefs.plist"
+        @"/var/mobile/Library/Preferences/com.weishi.fmfipspoofer-prefs.plist"
         ];
     if ([[prefs objectForKey:@"enableLocationSpoofing"] boolValue]){
-        double spoofedLat, spoofedLong;
+        double spoofedLat, spoofedLng;
         spoofedLat=[[prefs objectForKey:@"latitude"] doubleValue];
-        spoofedLong=[[prefs objectForKey:@"longitude"] doubleValue];
-        transform(spoofedLat, spoofedLong, &nlat, &nlng);
+        spoofedLng=[[prefs objectForKey:@"longitude"] doubleValue];
+        if ([[prefs objectForKey:@"reportShiftedLocation"] boolValue]==NO){
+            transform(spoofedLat, spoofedLng, &nlat, &nlng);
+            nlat=spoofedLat-(nlat-spoofedLat);
+            nlng=spoofedLng-(nlng-spoofedLng);
+        }else{
+            //Pad a shift and let remote user cancel the shift. 
+            transform(spoofedLat, spoofedLng, &nlat, &nlng);
+            nlat-=3*(nlat-spoofedLat);
+            nlng-=3*(nlng-spoofedLng);
+        }
     }else{
-        transform(lp.coordinate.latitude, lp.coordinate.longitude, &nlat, &nlng);
+        //Incoming coordinates are true GPS coordinates.
+        if ([[prefs objectForKey:@"reportShiftedLocation"] boolValue]==NO){
+            //For unjailbroken devices, use true GPS coordinates.
+            nlat=lp.coordinate.latitude;
+            nlng=lp.coordinate.longitude;
+        }else{
+            //Pad a shift and let remote user cancel the shift. 
+            transform(lp.coordinate.latitude, lp.coordinate.longitude, &nlat, &nlng);
+            nlat-=2*(nlat-lp.coordinate.latitude);
+            nlng-=2*(nlng-lp.coordinate.longitude);
+        }
     }
     CLLocation *c = [[[CLLocation alloc] 
         initWithCoordinate:CLLocationCoordinate2DMake(nlat, nlng)
@@ -99,15 +120,31 @@ double transformLon(double x, double y)
     CLLocation *lp=(CLLocation *)fp8;
     double nlat,nlng;
     NSDictionary *prefs=[[NSDictionary alloc] initWithContentsOfFile:
-        @"/var/mobile/Library/Preferences/com.weishi.fmflocationfix-prefs.plist"
+        @"/var/mobile/Library/Preferences/com.weishi.fmfipspoofer-prefs.plist"
         ];
     if ([[prefs objectForKey:@"enableLocationSpoofing"] boolValue]){
-        double spoofedLat, spoofedLong;
+        double spoofedLat, spoofedLng;
         spoofedLat=[[prefs objectForKey:@"latitude"] doubleValue];
-        spoofedLong=[[prefs objectForKey:@"longitude"] doubleValue];
-        transform(spoofedLat, spoofedLong, &nlat, &nlng);
+        spoofedLng=[[prefs objectForKey:@"longitude"] doubleValue];
+        if ([[prefs objectForKey:@"reportShiftedLocation"] boolValue]==NO){
+            nlat=spoofedLat;
+            nlng=spoofedLng;
+        }else{
+            //Pad a shift and let remote user cancel the shift. 
+            transform(spoofedLat, spoofedLng, &nlat, &nlng);
+            nlat=spoofedLat-(nlat-spoofedLat);
+            nlng=spoofedLng-(nlng-spoofedLng);
+        }
     }else{
-        transform(lp.coordinate.latitude, lp.coordinate.longitude, &nlat, &nlng);
+        //Incoming coordinates have been shifted already.
+        if ([[prefs objectForKey:@"reportShiftedLocation"] boolValue]==NO){
+            //For unjailbroken devices, convert to true GPS coordinates
+            transform(lp.coordinate.latitude, lp.coordinate.longitude, &nlat, &nlng);
+        }else{
+            //Already shifted and let remote user cancel the shift. 
+            nlat=lp.coordinate.latitude;
+            nlng=lp.coordinate.longitude;
+        }
     }
     CLLocation *c = [[[CLLocation alloc] 
         initWithCoordinate:CLLocationCoordinate2DMake(nlat, nlng)
